@@ -100,6 +100,11 @@ contract StakeFees is ERC4626 {
         }
 
         uint256 assets = previewRedeem(shares); //assets reducidos por el fee
+
+        User storage _user = user[receiver];
+        _user.vesting = 0;
+        _user.amount = 0;
+
         _withdraw(msg.sender, receiver, owner, assets, shares);
 
         return assets;
